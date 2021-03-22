@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>Contact Manager</title>
+  </head>
+  <body>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>    
+
+    <div id="app" style="width: 600px;">
+      <div>
+        <input v-model="contact.name" type="text" placeholder="이름">    
+        <input v-model="contact.phone" type="text" placeholder="전화번호">
+        <input v-model="contact.email" type="text" placeholder="이메일">
+        <button @click="add">추가</button>
+      </div>
+      <table style="clear: both; width: 100%;">
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>이메일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in list">
+            <td>{{ item.name }}</td>
+            <td>{{ item.phone }}</td>
+            <td>{{ item.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          contact: {
+            name: '',
+            phone: '',
+            email: ''
+          },
+          list: [],          
+        },
+        methods: {
+          add: function(){
+            // 배열에 추가
+            // object copy
+            // spread operator, object literal
+            // ES2018(ES9)
+            // ({name:'sdsdf', phone:'ddd', email:'sdfsdf'})
+
+            // this.list.unshift({
+            //   name: this.contact.name, 
+            //   phone: this.contact.phone,
+            //   email: this.contact.email
+            // })
+
+            this.list.unshift({...this.contact});
+
+            // X 잘못된 방법: this.list.unshift(this.contact);
+
+            // JSON.stringfy "{\"name\":\"....", ////}"
+            // 참조형 데이터 -> 문자열 값
+            // JSON.parse
+            // 문자열로 새로운 객체
+            // "{\"name\":\"....", ////}" -> {name:'.....'}
+            // JSON-> 문자열
+            // this.list.unshift(JSON.parse(JSON.stringify(this.contact)));
+
+            // 입력값 초기화
+            for(prop in this.contact){
+              this.contact[prop] = '';
+            }
+          }
+        }
+      })      
+    </script>
+  </body>
+</html>

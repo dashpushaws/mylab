@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>Vue.js 연습</title>
+  </head>
+  <body>
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script> 
+
+    <div id="app">
+      <!-- v-model: 양방향 바인딩 속성 -->
+      <input type="text" v-model="memo">
+      <!-- v-on: 이벤트 -->
+      <button @click="add()">추가</button>
+      <!-- :list="list" -->
+      <!--컴포넌트에 list라는 속성에 list 변수를 내려준다.(바인딩) -->
+      <!-- 커스텀 이벤트 -->
+      <!-- @item-deleted가 이벤트가 발생하면 listItemDeleted 함수가 실행됨 -->
+      <!-- props down, event up : vue.js, react -->
+      <!-- data down, action up : ember.js, angular -->
+      <deleting-list :list="list" @item-deleted="listItemDeleted" />
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        components: {
+          'deleting-list': httpVueLoader('./vue_deleting_list.vue'),
+        },          
+        data: {
+          memo: "",
+          list: [],
+        },
+        methods: {
+          add: function(){
+            this.list.unshift({ memo: this.memo })  // 배열에 추가
+            this.memo = ""; // 입력 값 초기화
+          },
+          listItemDeleted: function(item) {
+            console.log('-- deleted item --');
+            console.log(item);
+          }
+        }
+      })
+    </script>
+
+  </body>
+</html>
