@@ -1,5 +1,6 @@
 <template>
   <div>
+    Feeds
     <!--반응형 grid layout 컨테이너-->
     <v-container>
       <v-row>

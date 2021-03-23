@@ -1,7 +1,10 @@
 <template>
   <v-app>
     <v-app-bar app color="white" flat>
-      <v-avatar tile color="blue" width="100">UPSE.GG</v-avatar>
+      <v-img
+        src="../logo/logo.png" max-height="100" max-width="100" @click="navigateTo(test)"
+      ></v-img>
+      <!-- <v-avatar tile color="blue" width="100">UPSE.GG</v-avatar> -->
 
       <v-avatar
         :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
@@ -17,11 +20,9 @@
     <v-main>
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
-        <!-- If using vue-router -->
         <router-view></router-view>
       </v-container>
     </v-main>
-    
   </v-app>
 </template>
 
@@ -29,10 +30,11 @@
 export default {
   data: () => ({
     // links: ["커뮤니티", "스토어", "랭킹"],
+    test: { path: "/"},
     links: [
-      { text: "커뮤니티", path: "/" },
+      { text: "커뮤니티", path: "/todo" },
       { text: "스토어", path: "/contacts" },
-      { text: "랭킹", path: "/feeds" },
+      { text: "전적검색", path: "/feeds" },
     ],
   }),
 
