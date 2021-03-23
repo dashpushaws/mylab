@@ -1,60 +1,50 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <v-app-bar app color="white" flat>
+      <v-avatar tile color="blue" width="100">UPSE.GG</v-avatar>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-avatar
+        :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
+        size="32"
+      ></v-avatar>
+      <v-tabs centered class="ml-n9" color="grey darken-1">
+        <v-tab v-for="(link, i) in links" :key="i" @click="navigateTo(link)">
+          {{ link.text }}
+        </v-tab>
+      </v-tabs>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <!-- Provides the application the proper gutter -->
+      <v-container fluid>
+        <!-- If using vue-router -->
+        <router-view></router-view>
+      </v-container>
     </v-main>
+    
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
 export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
   data: () => ({
-    //
+    // links: ["커뮤니티", "스토어", "랭킹"],
+    links: [
+      { text: "커뮤니티", path: "/" },
+      { text: "스토어", path: "/contacts" },
+      { text: "랭킹", path: "/feeds" },
+    ],
   }),
+
+  methods: {
+    navigateTo(item) {
+      /* https://router.vuejs.org/kr/guide/essentials/navigation.html */
+      // 현재 경로와 다르면
+      if (this.$route.path != item.path) {
+        // 라우터에 경로 추가
+        this.$router.push(item.path);
+      }
+    },
+  },
 };
 </script>
