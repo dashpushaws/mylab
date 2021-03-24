@@ -11,6 +11,27 @@ const routes = [
     component: Home
   },
   {
+    path: '/board',
+    name: 'board',
+    component: () => import('../views/Board.vue')
+  },
+  {
+    path: '/board/view',
+    name: 'board-view',
+    component: () => import('../views/BoardView.vue')
+  },
+  {
+    path: '/board/write',
+    name: 'board-write',
+    component: () => import('../views/BoardWrite.vue')
+  },
+  {
+    path: '/board/modify',
+    name: 'board-modify',
+    component: () => import('../views/BoardModify.vue')
+  },
+  //여기까지가 김민태 페이지 라우팅
+  {
     path: '/contacts',
     name: 'contacts',
     component: () => import('../views/Contacts.vue')
