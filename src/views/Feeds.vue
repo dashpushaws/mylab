@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Header />
+
     Feeds
     <!--반응형 grid layout 컨테이너-->
     <v-container>
@@ -22,7 +24,10 @@
   </div>
 </template>
 <script>
+import Header from "../components/Header";
 export default {
-  
-}
+  components: {
+    Header,
+  },
+};
 </script>
